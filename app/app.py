@@ -3,9 +3,11 @@ from flask import jsonify, abort
 import os
 
 app = flask.Flask(__name__)
+db = SQLAlchemy(app)
+
 app.config["DEBUG"] = True
-
-
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config.from_object(os.environ['APP_SETTINGS'])
 
 
 @app.route("/api/v1/sending_messages", methods=["GET"])
