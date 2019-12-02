@@ -1,12 +1,12 @@
 from app import app
-from flask import jsonify, abort
+from flask import jsonify, abort, request
+from tasks import example
 
-
-@app.route("/api/v1/sending_messages", methods=["GET"])
+@app.route("/api/v1/sending_messages", methods=["POST"])
 def sending_messages():
-    data = {
-        "Hello": "World"
-    }
+    data = request.json
+    print(data)
+    
     return data
 
 
