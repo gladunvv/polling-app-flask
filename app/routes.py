@@ -5,8 +5,8 @@ from tasks import example
 @app.route("/api/v1/sending_messages", methods=["POST"])
 def sending_messages():
     data = request.json
-    print(data)
-    
+    if data
+        
     return data
 
 
