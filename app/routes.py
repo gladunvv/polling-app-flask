@@ -1,13 +1,23 @@
 from app import app
 from flask import jsonify, abort, request
 from tasks import example
+from validators import MessageValidators
+
 
 @app.route("/api/v1/sending_messages", methods=["POST"])
 def sending_messages():
     data = request.json
-    if data
-        
-    return data
+    try:
+        MessageValidators(data)
+        message = {
+            "message": "okkkk"
+        }
+        return message
+    except:
+        message = {
+            "error": "invalid data"
+        }
+        return message
 
 
 @app.errorhandler(400)
