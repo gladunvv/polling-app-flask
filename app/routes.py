@@ -7,17 +7,14 @@ from validators import MessageValidators
 @app.route("/api/v1/sending_messages", methods=["POST"])
 def sending_messages():
     data = request.json
-    try:
-        MessageValidators(data)
-        message = {
-            "message": "okkkk"
-        }
-        return message
-    except:
-        message = {
-            "error": "invalid data"
-        }
-        return message
+    print(data)
+    MessageValidators(**data)
+    message = data['message']
+    response = {
+        "message": message,
+    }
+    return response
+
 
 
 @app.errorhandler(400)
