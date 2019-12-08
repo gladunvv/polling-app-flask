@@ -2,19 +2,25 @@ from app import app
 from flask import jsonify, abort, request
 from tasks import example
 from validators import MessageValidators
+from pydantic import ValidationError
 
 
 @app.route("/api/v1/sending_messages", methods=["POST"])
 def sending_messages():
-    data = request.json
-    print(data)
-    MessageValidators(**data)
-    message = data['message']
-    response = {
-        "message": message,
-    }
-    return response
+    try:
+        data = request.json 
+        MessageValidators(**data)
+        message = data['message']
+        response = {
+            'message': message,
+        }
+        return response
 
+    except ValidationError as e:
+        response = {
+            "error": f"{type(e).__name__}",
+        }
+        return response
 
 
 @app.errorhandler(400)
