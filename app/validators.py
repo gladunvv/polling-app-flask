@@ -2,6 +2,7 @@ from pydantic import BaseModel, validator
 from datetime import datetime
 from typing import List
 import json
+from pydantic.dataclasses import dataclass
 
 
 class MessengerValidators(BaseModel):
@@ -18,7 +19,7 @@ class ContactValidators(BaseModel):
 
 class MessageValidators(BaseModel):
     message: str
-    date_at: datetime = None
+    date_at: datetime
     contact_list: List[ContactValidators]
 
     @validator('date_at', pre=True, always=True)
